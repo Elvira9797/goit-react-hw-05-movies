@@ -12,7 +12,7 @@ export const StyledInput = styled.input`
   border-left: none;
   border-right: none;
   border-bottom: 1px solid gray;
-  border-bottom-radius: 0;
+  border-radius: 0;
   width: 200px;
   color: white;
   font-size: 18px;
