@@ -2,6 +2,7 @@ import Loader from 'components/Loader';
 import { useEffect, useState } from 'react';
 import { getTrendingFilms } from 'services/api';
 import TrendingFilms from 'components/TrendingFilms';
+import handleError from 'helpers';
 
 const Home = () => {
   const [trendingFilms, setTrendingFilms] = useState([]);
@@ -15,17 +16,13 @@ const Home = () => {
         const data = await getTrendingFilms();
         setTrendingFilms(data.results);
       } catch (error) {
-        handleError();
+        handleError(setError);
       } finally {
         setIsLoading(false);
       }
     };
     fetchData();
   }, []);
-
-  const handleError = () => {
-    setError('Oops, some error occurred. Please, try again later.');
-  };
 
   return (
     <>

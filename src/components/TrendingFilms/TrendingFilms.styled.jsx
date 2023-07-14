@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.section`
   display: flex;
@@ -20,6 +21,7 @@ export const StyledTrendingFilmsGallery = styled.ul`
   margin-left: auto;
   margin-right: auto;
 `;
+
 export const StyledTrendingFilm = styled.li`
   border-radius: 2px;
   overflow: hidden;
@@ -34,7 +36,18 @@ export const ImageTrendingFilm = styled.img`
   object-fit: cover;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
-    //   transform: scale(1.03);
+    transform: scale(1.03);
     cursor: pointer;
   }
+`;
+
+export const StyledTrendingLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+`;
+
+export const StyledNameTrendingFilm = styled.h2`
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 22px;
 `;

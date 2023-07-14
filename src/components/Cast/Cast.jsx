@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getCastFilm } from 'services/api';
 import {
+  NoCast,
   StyledCastImg,
   StyledCastItem,
   StyledCastList,
   StyledNameActor,
 } from './Cast.styled';
 import noImage from '../../images/no-image.jpg';
+import handleError from 'helpers';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -24,7 +26,7 @@ const Cast = () => {
         const data = await getCastFilm(movieId);
         setCast(data.cast);
       } catch (error) {
-        handleError();
+        handleError(setError);
       } finally {
         setIsLoading(false);
       }
@@ -32,15 +34,11 @@ const Cast = () => {
     fetchData();
   }, [movieId]);
 
-  const handleError = () => {
-    setError('Oops, some error occurred. Please, try again later.');
-  };
-
   return (
     <>
       {isLoading && <Loader />}
       {error && <p>{error}</p>}
-      {cast && (
+      {cast.length > 0 ? (
         <StyledCastList>
           {cast.map(({ id, name, profile_path, character }) => (
             <StyledCastItem key={id}>
@@ -57,6 +55,8 @@ const Cast = () => {
             </StyledCastItem>
           ))}
         </StyledCastList>
+      ) : (
+        <NoCast>We don't have any cast members for this movie</NoCast>
       )}
     </>
   );

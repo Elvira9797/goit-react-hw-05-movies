@@ -1,4 +1,5 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   StyledFilmImg,
   StyledDescription,
@@ -6,8 +7,11 @@ import {
   StyledLink,
   StyledNavList,
   StyledGenres,
+  StyledLinkBack,
+  StyledArrowLeftIcon,
 } from './FilmDescription.styled';
-// import noImage from '../../images/no-image.jpg';
+import { Suspense, useRef } from 'react';
+import noImage from '../../images/no-image.jpg';
 
 const FilmDescription = ({
   film: {
@@ -20,6 +24,9 @@ const FilmDescription = ({
     genres,
   },
 }) => {
+  const location = useLocation();
+  const backLinkHref = useRef(location.state?.from ?? '/');
+
   const getGenres = () => {
     const genresName = genres.map(genre => genre.name);
     return genresName.join(', ');
@@ -27,26 +34,32 @@ const FilmDescription = ({
 
   return (
     <section>
+      <StyledLinkBack to={backLinkHref.current}>
+        <StyledArrowLeftIcon />
+        Go back
+      </StyledLinkBack>
       <StyledFilmDescription>
         <StyledFilmImg
           src={
-            poster_path && `https://image.tmdb.org/t/p/original/${poster_path} `
+            poster_path
+              ? `https://image.tmdb.org/t/p/original/${poster_path} `
+              : noImage
           }
           alt={title ?? name}
         />
         <StyledDescription>
           <h1>
-            {title ?? name} ({release_date?.substring(0, 4)})
+            {title ?? name}
+            {release_date && ` (${release_date?.substring(0, 4)})`}
           </h1>
           <StyledGenres>
             User score: {Math.round((vote_average / 10) * 100)}%
           </StyledGenres>
-
           <h2>Overview</h2>
           <p>{overview}</p>
 
-          <h2>Genres</h2>
-          <p>{genres && getGenres()}</p>
+          {genres?.length > 0 && <h2>Genres</h2>}
+          <p>{genres?.length > 0 && getGenres()}</p>
         </StyledDescription>
       </StyledFilmDescription>
       <StyledNavList>
@@ -57,8 +70,15 @@ const FilmDescription = ({
           <StyledLink to="reviews">Reviews</StyledLink>
         </li>
       </StyledNavList>
-      <Outlet />
+      <Suspense>
+        <Outlet />
+      </Suspense>
     </section>
   );
 };
+
+FilmDescription.propTypes = {
+  film: PropTypes.object,
+};
+
 export default FilmDescription;

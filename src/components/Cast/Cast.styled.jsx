@@ -31,3 +31,7 @@ export const StyledCastImg = styled.img`
 export const StyledNameActor = styled.h3`
   margin-bottom: 10px;
 `;
+
+export const NoCast = styled.p`
+  margin-top: 40px;
+`;

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import { ReactComponent as ArrowLeftIcon } from '../../images/arrow-left.svg';
 
 export const StyledFilmDescription = styled.div`
   display: flex;
@@ -46,4 +47,17 @@ export const StyledLink = styled(NavLink)`
     background-color: #f87719;
     border: 1px solid #f87719;
   }
+`;
+
+export const StyledLinkBack = styled(Link)`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #f99248;
+  margin-bottom: 20px;
+`;
+
+export const StyledArrowLeftIcon = styled(ArrowLeftIcon)`
+  stroke: #f99248;
 `;

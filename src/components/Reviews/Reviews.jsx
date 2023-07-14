@@ -8,6 +8,7 @@ import {
   StyledReviews,
   StyledReviewsList,
 } from './Reviews.styled';
+import handleError from 'helpers';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -23,7 +24,7 @@ const Reviews = () => {
         const data = await getReviews(movieId);
         setReviews(data.results);
       } catch (error) {
-        handleError();
+        handleError(setError);
       } finally {
         setIsLoading(false);
       }
@@ -31,9 +32,6 @@ const Reviews = () => {
     fetchData();
   }, [movieId]);
 
-  const handleError = () => {
-    setError('Oops, some error occurred. Please, try again later.');
-  };
   return (
     <>
       {isLoading && <Loader />}
