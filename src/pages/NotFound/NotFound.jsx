@@ -3,7 +3,7 @@ import {
   StyledArrowLeftIcon,
   StyledLinkBack,
 } from 'components/FilmDescription/FilmDescription.styled';
-import { Wrapper } from './NotFound.styled';
+import { StyledNoFoundImg, Wrapper } from './NotFound.styled';
 
 const NotFound = () => {
   return (
@@ -12,7 +12,7 @@ const NotFound = () => {
         <StyledArrowLeftIcon />
         Return to home page
       </StyledLinkBack>
-      <img src={notFound} alt="Page not found" />
+      <StyledNoFoundImg src={notFound} alt="Page not found" />
     </Wrapper>
   );
 };
