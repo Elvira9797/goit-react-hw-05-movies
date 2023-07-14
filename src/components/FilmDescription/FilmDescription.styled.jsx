@@ -20,7 +20,7 @@ export const StyledFilmImg = styled.img`
 `;
 
 export const StyledDescription = styled.div`
-  max-width: 500px;
+  max-width: 510px;
 `;
 
 export const StyledNavList = styled.ul`
