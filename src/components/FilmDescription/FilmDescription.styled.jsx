@@ -14,7 +14,7 @@ export const StyledFilmDescription = styled.div`
 
 export const StyledFilmImg = styled.img`
   display: block;
-  width: 350px;
+  max-width: 350px;
   height: 500px;
   object-fit: cover;
 `;

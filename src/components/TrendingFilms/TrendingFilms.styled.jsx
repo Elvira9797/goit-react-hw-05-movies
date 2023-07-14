@@ -12,7 +12,7 @@ export const Wrapper = styled.section`
 export const StyledTrendingFilmsGallery = styled.ul`
   display: grid;
   max-width: calc(100vw - 48px);
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   grid-gap: 16px;
   margin-top: 0;
   margin-bottom: 0;
