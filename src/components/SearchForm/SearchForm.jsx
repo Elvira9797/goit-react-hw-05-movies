@@ -11,7 +11,7 @@ const SearchForm = ({ addMovie }) => {
   };
 
   return (
-    <div>
+    <>
       <StyledForm onSubmit={handleSubmit}>
         <StyledInput
           type="text"
@@ -23,7 +23,7 @@ const SearchForm = ({ addMovie }) => {
           <SearchIcon />
         </StyledButton>
       </StyledForm>
-    </div>
+    </>
   );
 };
 

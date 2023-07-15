@@ -5,7 +5,7 @@ import { ReactComponent as ArrowLeftIcon } from '../../images/arrow-left.svg';
 export const StyledFilmDescription = styled.div`
   display: flex;
   gap: 16px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 
   @media (max-width: 620px) {
     flex-direction: column;
@@ -36,6 +36,7 @@ export const StyledGenres = styled.p`
 `;
 
 export const StyledLink = styled(NavLink)`
+  display: block;
   padding: 8px 16px;
   border-radius: 4px;
   text-decoration: none;
