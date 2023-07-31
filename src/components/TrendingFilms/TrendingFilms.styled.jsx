@@ -1,14 +1,6 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
-export const Wrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 40px;
-`;
-
 export const StyledTrendingFilmsGallery = styled.ul`
   display: grid;
   max-width: calc(100vw - 48px);
@@ -18,6 +10,7 @@ export const StyledTrendingFilmsGallery = styled.ul`
   margin-bottom: 0;
   padding: 0;
   list-style: none;
+  margin-bottom: 40px;
   margin-left: auto;
   margin-right: auto;
 `;

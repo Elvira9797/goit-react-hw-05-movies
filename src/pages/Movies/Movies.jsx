@@ -2,7 +2,7 @@ import Loader from 'components/Loader';
 import SearchForm from 'components/SearchForm';
 import SearchMovies from 'components/SearchMovies';
 import handleError from 'helpers';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getMovieByName } from 'services/api';
@@ -15,6 +15,23 @@ const Movies = () => {
 
   const searchParam = searchParams.get('query');
 
+  const handleMovies = useCallback(
+    data => {
+      if (data.results.length === 0) {
+        setIsLoading(false);
+        setMoviesByName([]);
+        setSearchParams({});
+        toast.error(
+          'Sorry, there are no movies matching your search query. Please try again'
+        );
+      } else {
+        setMoviesByName(data.results);
+        setIsLoading(false);
+      }
+    },
+    [setSearchParams]
+  );
+
   useEffect(() => {
     if (!searchParam) return;
 
@@ -23,17 +40,7 @@ const Movies = () => {
         setIsLoading(true);
         setMoviesByName([]);
         const data = await getMovieByName(searchParam);
-        if (data.results.length === 0) {
-          setIsLoading(false);
-          setMoviesByName([]);
-          setSearchParams({});
-          toast.error(
-            'Sorry, there are no movies matching your search query. Please try again'
-          );
-        } else {
-          setMoviesByName(data.results);
-          setIsLoading(false);
-        }
+        handleMovies(data);
       } catch (error) {
         handleError(setError);
       } finally {
@@ -41,7 +48,7 @@ const Movies = () => {
       }
     };
     fetchData();
-  }, [searchParam, setSearchParams]);
+  }, [searchParam, handleMovies]);
 
   const addMovie = searchValue => {
     if (searchValue.trim() === '') {

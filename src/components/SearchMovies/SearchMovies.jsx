@@ -1,7 +1,6 @@
 import {
   ImageTrendingFilm,
   StyledTrendingFilm,
-  Wrapper,
 } from '../TrendingFilms/TrendingFilms.styled';
 import {
   StyledLink,
@@ -16,28 +15,24 @@ const SearchMovies = ({ moviesByName }) => {
   const location = useLocation();
 
   return (
-    <Wrapper>
-      <StyledSearchMoviesGallery>
-        {moviesByName.map(
-          ({ id, poster_path, release_date, original_title }) => (
-            <StyledTrendingFilm key={id}>
-              <StyledLink state={{ from: location }} to={`${id}`}>
-                <ImageTrendingFilm
-                  src={
-                    poster_path
-                      ? `https://image.tmdb.org/t/p/original/${poster_path} `
-                      : noImage
-                  }
-                  alt={original_title}
-                />
-                <StyledNameFilm>{original_title}</StyledNameFilm>
-                <span>{release_date.substring(0, 4)}</span>
-              </StyledLink>
-            </StyledTrendingFilm>
-          )
-        )}
-      </StyledSearchMoviesGallery>
-    </Wrapper>
+    <StyledSearchMoviesGallery>
+      {moviesByName.map(({ id, poster_path, release_date, original_title }) => (
+        <StyledTrendingFilm key={id}>
+          <StyledLink state={{ from: location }} to={`${id}`}>
+            <ImageTrendingFilm
+              src={
+                poster_path
+                  ? `https://image.tmdb.org/t/p/original/${poster_path} `
+                  : noImage
+              }
+              alt={original_title}
+            />
+            <StyledNameFilm>{original_title}</StyledNameFilm>
+            <span>{release_date.substring(0, 4)}</span>
+          </StyledLink>
+        </StyledTrendingFilm>
+      ))}
+    </StyledSearchMoviesGallery>
   );
 };
 
