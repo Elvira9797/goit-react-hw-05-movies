@@ -1,3 +1,4 @@
+import throttle from 'lodash.throttle';
 import { useEffect, useState } from 'react';
 import { ReactComponent as ButtonToTop } from '../../images/chevron-up.svg';
 import { BtnToTop, Text } from './ScrollToTopButton.styled';
@@ -13,7 +14,7 @@ const ScrollToTopButton = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', throttle(handleScroll, 300));
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
